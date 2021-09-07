@@ -27,7 +27,7 @@ export default {
 
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: './static/img/poke.png' }
+      { rel: 'icon', type: 'image/png', href: '../../img/poke.png' }
     ]
   },
 
