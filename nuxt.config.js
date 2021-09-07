@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Minha Pokedex Vue',
+    title: 'Minha Pokedex Nuxt',
     htmlAttrs: {
       lang: 'pt-BR'
     },
