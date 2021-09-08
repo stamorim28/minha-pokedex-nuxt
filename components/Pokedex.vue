@@ -50,7 +50,7 @@ export default {
       if (this.search == "" || this.search == " ") {
         return this.pokemons;
       } else {
-        return this.pokemons.filter(pokemon => pokemon.name == this.search);
+        return this.pokemons.filter(pokemon => pokemon.name == this.search.toLowerCase());
       }
     }
   }
