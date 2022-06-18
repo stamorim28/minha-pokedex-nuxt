@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style>
+<style style lang="scss">
 .boxPokemon {
   width: 100%;
   padding: 1rem;
