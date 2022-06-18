@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style>
+<style style lang="scss">
 section {
   width: 100%;
 }
