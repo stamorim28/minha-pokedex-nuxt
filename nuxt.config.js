@@ -42,9 +42,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxt/typescript-build'
-  ],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -54,7 +52,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://pokeapi.co/api/v2/pokemon'
+    baseURL: 'https://pokeapi.co/api/v2/'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
