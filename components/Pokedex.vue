@@ -19,100 +19,112 @@
 </template>
 
 <script>
-import Pokemon from "./Pokemon/Pokemon.vue";
-import api from "../api/index";
+  import { mapActions, mapGetters, mapState } from "vuex";
+  import Pokemon from "@/components/Pokemon";
+  import api from "@/api";
 
-export default {
-  name: "Pokedex",
-  components: {
-    Pokemon
-  },
-  data() {
-    return {
-      pokemons: [],
-      search: ""
-    };
-  },
-  created() {
-    api
-      .get(api.baseURL)
-      .then(res => {
-        this.pokemons = res.data.results;
-        // console.log(this.pokemons);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
-  methods: {},
-  computed: {
-    searchPokemon() {
-      if (this.search == "" || this.search == " ") {
-        return this.pokemons;
-      } else {
-        return this.pokemons.filter(pokemon => pokemon.name == this.search.toLowerCase());
+  export default {
+    name: "Pokedex",
+    components: {
+      Pokemon,
+    },
+    data() {
+      return {
+        search: "",
+      };
+    },
+    computed: {
+      ...mapState("store", ["pokemons"]),
+      searchPokemon() {
+        if (this.search == "" || this.search == " ") {
+          return this.pokemons;
+        } else {
+          return this.pokemons.filter(
+            (pokemon) => pokemon.name == this.search.toLowerCase()
+          );
+        }
+      },
+    },
+    async fetch() {
+      try {
+        await this.fetchPokemons();
+      } catch (error) {
+        console.log(error)
       }
-    }
-  }
-};
+    },
+    // created() {
+    //   api
+    //     .get(api.baseURL)
+    //     .then((res) => {
+    //       this.pokemons = res.data.results;
+    //       // console.log(this.pokemons);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
+    methods: {
+      ...mapActions("store", ["fetchPokemons"]),
+    },
+  };
 </script>
 
 <style style lang="scss">
-section {
-  width: 100%;
-}
-
-.searchPoke {
-  width: 100%;
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-}
-
-.searchPoke input {
-  width: 70%;
-  padding: 0.75rem 0;
-  border: none;
-  border-bottom: 2px solid #fff;
-  background: transparent;
-  color: #fff;
-}
-
-.searchPoke input::placeholder {
-  color: #fff;
-}
-
-.containerPokemons,
-.blocoPokemons {
-  width: 100%;
-}
-
-.blocoPokemons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem;
-}
-
-@media (max-width: 989px) {
-  .blocoPokemons {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+  section {
+    width: 100%;
   }
-}
 
-@media (max-width: 810px) {
-  .blocoPokemons {
-    grid-template-columns: repeat(3, 1fr);
+  .searchPoke {
+    width: 100%;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
   }
-}
 
-@media (max-width: 596px) {
   .searchPoke input {
-    width: 90%;
+    width: 70%;
+    padding: 0.75rem 0;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    color: #fff;
   }
-  
+
+  .searchPoke input::placeholder {
+    color: #fff;
+  }
+
+  .containerPokemons,
   .blocoPokemons {
-    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
   }
-}
+
+  .blocoPokemons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 989px) {
+    .blocoPokemons {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 810px) {
+    .blocoPokemons {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 596px) {
+    .searchPoke input {
+      width: 90%;
+    }
+
+    .blocoPokemons {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>
